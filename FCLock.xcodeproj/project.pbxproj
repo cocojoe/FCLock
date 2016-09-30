@@ -7,13 +7,27 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5B6BAB6E1D9EE76600073099 /* FCLockController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B6BAB6C1D9EE76600073099 /* FCLockController.swift */; };
+		5B6BAB6F1D9EE76600073099 /* FCLockController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5B6BAB6D1D9EE76600073099 /* FCLockController.xib */; };
+		5B6BAB711D9EF08000073099 /* FCLockConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B6BAB701D9EF08000073099 /* FCLockConstants.swift */; };
 		5BB298591D9EBDBB008DDF3A /* FCLock.h in Headers */ = {isa = PBXBuildFile; fileRef = 5BB298571D9EBDBB008DDF3A /* FCLock.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5BB298601D9EBE56008DDF3A /* FCLockManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB2985F1D9EBE56008DDF3A /* FCLockManager.swift */; };
+		5BB298621D9EBF77008DDF3A /* FCLockNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB298611D9EBF77008DDF3A /* FCLockNetwork.swift */; };
+		F2090A1B4CD0CFCD80CF6B43 /* Pods_FCLock.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B27C38CD5C7F4C24FC16FD23 /* Pods_FCLock.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5B6BAB6C1D9EE76600073099 /* FCLockController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FCLockController.swift; sourceTree = "<group>"; };
+		5B6BAB6D1D9EE76600073099 /* FCLockController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FCLockController.xib; sourceTree = "<group>"; };
+		5B6BAB701D9EF08000073099 /* FCLockConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FCLockConstants.swift; sourceTree = "<group>"; };
 		5BB298541D9EBDBB008DDF3A /* FCLock.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FCLock.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5BB298571D9EBDBB008DDF3A /* FCLock.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FCLock.h; sourceTree = "<group>"; };
 		5BB298581D9EBDBB008DDF3A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5BB2985F1D9EBE56008DDF3A /* FCLockManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FCLockManager.swift; sourceTree = "<group>"; };
+		5BB298611D9EBF77008DDF3A /* FCLockNetwork.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FCLockNetwork.swift; sourceTree = "<group>"; };
+		6AFF3DF89279DC6DD70A3260 /* Pods-FCLock.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FCLock.release.xcconfig"; path = "Pods/Target Support Files/Pods-FCLock/Pods-FCLock.release.xcconfig"; sourceTree = "<group>"; };
+		B27C38CD5C7F4C24FC16FD23 /* Pods_FCLock.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FCLock.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F4E07BFB7CD6D4F86E111867 /* Pods-FCLock.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FCLock.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FCLock/Pods-FCLock.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -21,6 +35,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F2090A1B4CD0CFCD80CF6B43 /* Pods_FCLock.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -32,6 +47,8 @@
 			children = (
 				5BB298561D9EBDBB008DDF3A /* FCLock */,
 				5BB298551D9EBDBB008DDF3A /* Products */,
+				DEFDB001173BC8474294E0A5 /* Pods */,
+				797FB8606096C287DCB7A645 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -48,8 +65,30 @@
 			children = (
 				5BB298571D9EBDBB008DDF3A /* FCLock.h */,
 				5BB298581D9EBDBB008DDF3A /* Info.plist */,
+				5BB2985F1D9EBE56008DDF3A /* FCLockManager.swift */,
+				5BB298611D9EBF77008DDF3A /* FCLockNetwork.swift */,
+				5B6BAB6C1D9EE76600073099 /* FCLockController.swift */,
+				5B6BAB6D1D9EE76600073099 /* FCLockController.xib */,
+				5B6BAB701D9EF08000073099 /* FCLockConstants.swift */,
 			);
 			path = FCLock;
+			sourceTree = "<group>";
+		};
+		797FB8606096C287DCB7A645 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				B27C38CD5C7F4C24FC16FD23 /* Pods_FCLock.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		DEFDB001173BC8474294E0A5 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				F4E07BFB7CD6D4F86E111867 /* Pods-FCLock.debug.xcconfig */,
+				6AFF3DF89279DC6DD70A3260 /* Pods-FCLock.release.xcconfig */,
+			);
+			name = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -70,10 +109,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 5BB2985C1D9EBDBB008DDF3A /* Build configuration list for PBXNativeTarget "FCLock" */;
 			buildPhases = (
+				7AAF1A30BF30B5E32F0EFA4D /* [CP] Check Pods Manifest.lock */,
 				5BB2984F1D9EBDBA008DDF3A /* Sources */,
 				5BB298501D9EBDBA008DDF3A /* Frameworks */,
 				5BB298511D9EBDBA008DDF3A /* Headers */,
 				5BB298521D9EBDBA008DDF3A /* Resources */,
+				A10FF0CE24C3DD593CE197D4 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -95,6 +136,7 @@
 				TargetAttributes = {
 					5BB298531D9EBDBA008DDF3A = {
 						CreatedOnToolsVersion = 8.0;
+						LastSwiftMigration = 0800;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -121,16 +163,54 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5B6BAB6F1D9EE76600073099 /* FCLockController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		7AAF1A30BF30B5E32F0EFA4D /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		A10FF0CE24C3DD593CE197D4 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-FCLock/Pods-FCLock-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		5BB2984F1D9EBDBA008DDF3A /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5BB298621D9EBF77008DDF3A /* FCLockNetwork.swift in Sources */,
+				5B6BAB6E1D9EE76600073099 /* FCLockController.swift in Sources */,
+				5BB298601D9EBE56008DDF3A /* FCLockManager.swift in Sources */,
+				5B6BAB711D9EF08000073099 /* FCLockConstants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -238,7 +318,9 @@
 		};
 		5BB2985D1D9EBDBB008DDF3A /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F4E07BFB7CD6D4F86E111867 /* Pods-FCLock.debug.xcconfig */;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -250,13 +332,16 @@
 				PRODUCT_BUNDLE_IDENTIFIER = io.frostycube.FCLock;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
 		5BB2985E1D9EBDBB008DDF3A /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6AFF3DF89279DC6DD70A3260 /* Pods-FCLock.release.xcconfig */;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -291,6 +376,7 @@
 				5BB2985E1D9EBDBB008DDF3A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
