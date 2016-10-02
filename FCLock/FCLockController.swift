@@ -8,20 +8,37 @@
 
 import UIKit
 
-public struct FCLockSkin {
-    var backgroundColor = Constants.Theme.Tone3
+enum authAction {
+    case userNamePassword, passwordless, userNamePasscode
+}
+
+public class FCButton : UIButton {
+    var authAction:authAction = .userNamePassword
 }
 
 public class FCLockController: UIViewController {
     
     @IBOutlet weak var usernameField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
-    @IBOutlet weak var loginButton: UIButton!
+    @IBOutlet weak var loginButton: FCButton!
     @IBOutlet weak var loginView: UIView!
     
     override public func viewDidLoad() {
         super.viewDidLoad()
-        applySkin(skin: FCLockSkin())
+        
+        // Additional manual setup
+        usernameField.delegate = self
+        usernameField.layer.borderColor = UIColor.red.cgColor
+        passwordField.delegate = self
+        passwordField.layer.borderColor = UIColor.red.cgColor
+        
+        loginView.layer.cornerRadius = 4.0
+        
+        loginButton.disableButton()
+        loginButton.layer.cornerRadius = 4.0
+        
+        // Apply theme colors
+        applySkin(skin: FCLockConstants.ThemeDefault)
     }
     
     override public func didReceiveMemoryWarning() {
@@ -30,26 +47,125 @@ public class FCLockController: UIViewController {
     
     func applySkin(skin: FCLockSkin) {
         view.backgroundColor = skin.backgroundColor
+        loginView.backgroundColor = skin.boxColor
+        
+        usernameField.textColor = skin.inputTextColor
+        passwordField.textColor = skin.inputTextColor
+        
+        loginButton.backgroundColor = skin.buttonColor
+        loginButton.setTitleColor(skin.buttonTextColor, for: .normal)
+        
     }
     
     @IBAction func authenticateUser(_ sender: AnyObject) {
         
-        if let username = self.usernameField.text, let password = self.passwordField.text {
-            FCLockManager.sharedInstance.authenticate(username: username, password: password) {
-                print("Authentication failed")
-            }
+        switch loginButton.authAction {
+        case .userNamePassword, .userNamePasscode:
+            authenticateUserNamePassword()
+        case .passwordless:
+            requestPasswordcode()
+            
+            // Expected next user action, passcode entry
+            passwordField.placeholder = "Passcode"
+            passwordField.keyboardType = .numberPad
         }
-
+        
     }
     
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
-     }
-     */
+    private func authenticateUserNamePassword() {
+        
+        // Reset Error(s)
+        usernameField.hideError()
+        passwordField.hideError()
+        
+        // Validate username/email
+        // TODO: Soft email check
+        if usernameField.text?.characters.count == 0 {
+            usernameField.showError()
+            return
+        }
+        
+        // Validate password
+        // TODO: Soft check minimum limit (if there is one)
+        if passwordField.text?.characters.count == 0 {
+            passwordField.showError()
+            return
+        }
+        
+        if let username = self.usernameField.text, let password = self.passwordField.text {
+            FCLockManager.sharedInstance.authenticate(username: username, password: password) {
+                self.view.scalePop()
+                self.usernameField.showError()
+                self.passwordField.showError()
+            }
+        }
+    }
+    
+    private func requestPasswordcode() {
+        
+        // Reset Error(s)
+        usernameField.hideError()
+        passwordField.hideError()
+        
+        // Validate username/email
+        // TODO: Soft email check
+        if usernameField.text?.characters.count == 0 {
+            usernameField.showError()
+            return
+        }
+        
+        if let username = self.usernameField.text {
+            FCLockManager.sharedInstance.requestPasscode(username: username) {
+                self.view.scalePop()
+                self.usernameField.showError()
+            }
+        }
+    }
+}
+
+extension FCLockController: UITextFieldDelegate {
+    
+    public func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        
+        let password = passwordField.text
+        let length   = password!.characters.count
+        
+        if textField == passwordField {
+            self.view.endEditing(true)
+            
+            if length == 0 {
+                loginButton.setTitle("Request Passcode", for: .normal)
+                loginButton.authAction = .passwordless
+                loginButton.enableButton()
+            }
+            
+        } else {
+            passwordField.becomeFirstResponder()
+        }
+        
+        return true
+    }
+    
+    public func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        
+        if textField == passwordField {
+            
+            let password = passwordField.text
+            let length   = password!.characters.count
+            
+            if length == 0 {
+                loginButton.setTitle("Request Passcode", for: .normal)
+                loginButton.authAction = .passwordless
+            } else {
+                loginButton.setTitle("LOGIN", for: .normal)
+                loginButton.authAction = .userNamePasscode
+            }
+            
+            loginButton.enableButton()
+        }
+        
+        return true
+    }
     
 }
+

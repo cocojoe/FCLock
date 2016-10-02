@@ -37,7 +37,7 @@ public class FCLockManager {
         
         // Setup login controller
         authController = FCLockController(nibName: "FCLockController", bundle: lockBundle)
-        authController.modalPresentationStyle = .popover
+        authController.modalPresentationStyle = .overFullScreen
     }
     
     public func applySkin(skin: FCLockSkin) {
@@ -49,7 +49,7 @@ public class FCLockManager {
     }
     
     func authenticate(username: String, password: String, onError: @escaping FCLockHandler) {
-        network.login(username: username, password: password) { (success) in
+        network.authenticate(username: username, password: password) { (success) in
             if success == true {
                 self.authController.dismiss(animated: true, completion: nil)
                 self.onAuthentication()
@@ -58,4 +58,16 @@ public class FCLockManager {
             }
         }
     }
+    
+    func requestPasscode(username: String, onError: @escaping FCLockHandler) {
+        network.requestPasscode(username: username) { (success) in
+            if success == true {
+                self.onAuthentication()
+            } else {
+                onError()
+            }
+        }
+    }
+    
+
 }

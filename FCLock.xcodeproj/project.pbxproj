@@ -10,6 +10,7 @@
 		5B6BAB6E1D9EE76600073099 /* FCLockController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B6BAB6C1D9EE76600073099 /* FCLockController.swift */; };
 		5B6BAB6F1D9EE76600073099 /* FCLockController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5B6BAB6D1D9EE76600073099 /* FCLockController.xib */; };
 		5B6BAB711D9EF08000073099 /* FCLockConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B6BAB701D9EF08000073099 /* FCLockConstants.swift */; };
+		5B96E9301DA0037C007CA029 /* FCLockExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B96E92F1DA0037C007CA029 /* FCLockExtensions.swift */; };
 		5BB298591D9EBDBB008DDF3A /* FCLock.h in Headers */ = {isa = PBXBuildFile; fileRef = 5BB298571D9EBDBB008DDF3A /* FCLock.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5BB298601D9EBE56008DDF3A /* FCLockManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB2985F1D9EBE56008DDF3A /* FCLockManager.swift */; };
 		5BB298621D9EBF77008DDF3A /* FCLockNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB298611D9EBF77008DDF3A /* FCLockNetwork.swift */; };
@@ -20,6 +21,7 @@
 		5B6BAB6C1D9EE76600073099 /* FCLockController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FCLockController.swift; sourceTree = "<group>"; };
 		5B6BAB6D1D9EE76600073099 /* FCLockController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FCLockController.xib; sourceTree = "<group>"; };
 		5B6BAB701D9EF08000073099 /* FCLockConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FCLockConstants.swift; sourceTree = "<group>"; };
+		5B96E92F1DA0037C007CA029 /* FCLockExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FCLockExtensions.swift; sourceTree = "<group>"; };
 		5BB298541D9EBDBB008DDF3A /* FCLock.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FCLock.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5BB298571D9EBDBB008DDF3A /* FCLock.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FCLock.h; sourceTree = "<group>"; };
 		5BB298581D9EBDBB008DDF3A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -42,6 +44,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5B3D1B811D9FB21900E199BD /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				5B6BAB6D1D9EE76600073099 /* FCLockController.xib */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
 		5BB2984A1D9EBDBA008DDF3A = {
 			isa = PBXGroup;
 			children = (
@@ -63,13 +73,14 @@
 		5BB298561D9EBDBB008DDF3A /* FCLock */ = {
 			isa = PBXGroup;
 			children = (
+				5B3D1B811D9FB21900E199BD /* Resources */,
 				5BB298571D9EBDBB008DDF3A /* FCLock.h */,
 				5BB298581D9EBDBB008DDF3A /* Info.plist */,
 				5BB2985F1D9EBE56008DDF3A /* FCLockManager.swift */,
 				5BB298611D9EBF77008DDF3A /* FCLockNetwork.swift */,
 				5B6BAB6C1D9EE76600073099 /* FCLockController.swift */,
-				5B6BAB6D1D9EE76600073099 /* FCLockController.xib */,
 				5B6BAB701D9EF08000073099 /* FCLockConstants.swift */,
+				5B96E92F1DA0037C007CA029 /* FCLockExtensions.swift */,
 			);
 			path = FCLock;
 			sourceTree = "<group>";
@@ -210,6 +221,7 @@
 				5BB298621D9EBF77008DDF3A /* FCLockNetwork.swift in Sources */,
 				5B6BAB6E1D9EE76600073099 /* FCLockController.swift in Sources */,
 				5BB298601D9EBE56008DDF3A /* FCLockManager.swift in Sources */,
+				5B96E9301DA0037C007CA029 /* FCLockExtensions.swift in Sources */,
 				5B6BAB711D9EF08000073099 /* FCLockConstants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

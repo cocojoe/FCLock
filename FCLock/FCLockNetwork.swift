@@ -40,19 +40,29 @@ class FCLockNetwork {
         }
     }
     
-    func login(username: String, password: String, completion: @escaping (Bool) -> Void ) {
+    func authenticate(username: String, password: String, completion: @escaping (Bool) -> Void ) {
+        
+        var connection = "Username-Password-Authentication"
+        
+        // Quick check for numeric passcode, change connection mode
+        if Int(password) != nil {
+            connection = "email"
+        }
         
         let parameters = ["client_id": client.client_id,
                           "username" : username,
                           "password" : password,
-                          "id_token" : "",
-                          "connection" : "Username-Password-Authentication",
+                          "connection" : connection,
                           "grant_type" : "password",
-                          "scope" : "openid",
-                          "device" : "iOS"]
-        
+                          "scope" : "openid"]
+
         Alamofire.request("https://\(client.domain)/oauth/ro", method: .post, parameters: parameters,
                           encoding: JSONEncoding.default).validate().responseJSON { response in
+                            
+                            print(response.request)  // original URL request
+                            print(response.response) // HTTP URL response
+                            print(response.data)     // server data
+                            print(response.result)   // result of response serialization
                             
                             switch response.result {
                             case .success(let body):
@@ -68,6 +78,42 @@ class FCLockNetwork {
                                 self.token.type = token_type
                                 self.token.id = id_token
                                 self.token.access = access_token
+                                
+                                completion(true)
+                                
+                            case .failure(let error):
+                                print(error)
+                                completion(false)
+                            }
+        }
+    }
+    
+    func requestPasscode(username: String, completion: @escaping (Bool) -> Void ) {
+        
+        let parameters = ["connection" : "email",
+                          "client_id": client.client_id,
+                          "email" : username,
+                          "send" : "code"]
+
+        Alamofire.request("https://\(client.domain)/passwordless/start", method: .post, parameters: parameters,
+                          encoding: JSONEncoding.default).validate().responseJSON { response in
+                            
+                            print(response.request)  // original URL request
+                            print(response.response) // HTTP URL response
+                            print(response.data)     // server data
+                            print(response.result)   // result of response serialization
+                            
+                            switch response.result {
+                                
+                            case .success(let body):
+                                let tokenJSON = JSON(body)
+                                
+                                guard let email = tokenJSON["email"].string, let id = tokenJSON["_id"].string else {
+                                        completion(false)
+                                        return
+                                }
+                                
+                                print("Confirmation: \(id)\nEmail: \(email)")
                                 
                                 completion(true)
                                 
