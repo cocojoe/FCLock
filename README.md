@@ -4,7 +4,8 @@ Lightweight Auth0 login widget.  Swift 3.0
 
 ## Getting Started
 
-I would recommend using [CocoaPods](https://cocoapods.org/) for installation.
+### Cocoapods
+Using [CocoaPods](https://cocoapods.org/) for installation.
 YOU WILL NEED CocoaPods 1.1.0+ , Xcode 8
 
 Your `podfile` should look like this:
@@ -17,12 +18,19 @@ target '<YOUR PROJECT>' do
   # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
   use_frameworks!
   
-  # Local reference as in development
-  pod 'FCLock', :path => '<PATH TO>/FCLock/'
+  # Access directly
+  pod 'FCLock', :path => 'https://github.com/cocojoe/FCLock.git'
 end
 ```
 
-### Prerequisites
+### Carthage
+Using [Carthage](https://github.com/Carthage/Carthage) for installation.
+
+```
+carthage update --platform iOS
+```
+
+## Setup
 
 You will need an active [Auth0][https://auth0.com/] account, please add your credentials to your *Info.plist*:
 
@@ -35,7 +43,7 @@ You will need an active [Auth0][https://auth0.com/] account, please add your cre
 
 ## How to use it
 
-Add the library to your code.
+Import the framework to get started.
 
 ```
 import FCLock
