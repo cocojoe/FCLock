@@ -19,7 +19,7 @@ target '<YOUR PROJECT>' do
   use_frameworks!
   
   # Access directly
-  pod 'FCLock', :path => 'https://github.com/cocojoe/FCLock.git'
+  pod 'FCLock', :git => 'https://github.com/cocojoe/FCLock.git'
 end
 ```
 
