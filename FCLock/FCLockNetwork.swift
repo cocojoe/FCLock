@@ -9,38 +9,20 @@
 import Alamofire
 import SwiftyJSON
 
-struct Auth0 {
-    var client_id = ""
-    var domain = ""
-}
-
 struct Token {
-    var type = ""
-    var id = ""
-    var access = ""
+    var type:String?
+    var id:String?
+    var access:String?
 }
 
 class FCLockNetwork {
     
     var token = Token()
-    var client = Auth0()
-    
-    init() {
-        
-        let bundle = Bundle.main.path(forResource: "Info", ofType: "plist")
-        if let info = NSDictionary(contentsOfFile: bundle!) {
-            
-            guard let client_id = info["Auth0ClientId"],
-                let domain = info["Auth0Domain"] else {
-                    fatalError("Check Auth0 credentials (Auth0ClientId, Auth0Domain) set in Info.plist")
-            }
-            
-            client.client_id = client_id as! String
-            client.domain = domain as! String
-        }
-    }
     
     func authenticate(username: String, password: String, completion: @escaping (Bool) -> Void ) {
+        
+        guard let client = FCLockManager.sharedInstance.client.client_id,
+            let domain = FCLockManager.sharedInstance.client.domain else { return }
         
         var connection = "Username-Password-Authentication"
         
@@ -49,14 +31,14 @@ class FCLockNetwork {
             connection = "email"
         }
         
-        let parameters = ["client_id": client.client_id,
+        let parameters = ["client_id": client,
                           "username" : username,
                           "password" : password,
                           "connection" : connection,
                           "grant_type" : "password",
                           "scope" : "openid"]
 
-        Alamofire.request("https://\(client.domain)/oauth/ro", method: .post, parameters: parameters,
+        Alamofire.request("https://\(domain)/oauth/ro", method: .post, parameters: parameters,
                           encoding: JSONEncoding.default).validate().responseJSON { response in
                             
                             print(response.request)  // original URL request
@@ -88,14 +70,18 @@ class FCLockNetwork {
         }
     }
     
+    
     func requestPasscode(username: String, completion: @escaping (Bool) -> Void ) {
         
+        guard let client = FCLockManager.sharedInstance.client.client_id,
+            let domain = FCLockManager.sharedInstance.client.domain else { return }
+        
         let parameters = ["connection" : "email",
-                          "client_id": client.client_id,
+                          "client_id": client,
                           "email" : username,
                           "send" : "code"]
 
-        Alamofire.request("https://\(client.domain)/passwordless/start", method: .post, parameters: parameters,
+        Alamofire.request("https://\(domain)/passwordless/start", method: .post, parameters: parameters,
                           encoding: JSONEncoding.default).validate().responseJSON { response in
                             
                             print(response.request)  // original URL request

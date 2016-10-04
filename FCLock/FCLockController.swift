@@ -23,6 +23,11 @@ public class FCLockController: UIViewController {
     @IBOutlet weak var loginButton: FCButton!
     @IBOutlet weak var loginView: UIView!
     
+    @IBOutlet weak var webView: UIWebView!
+    @IBOutlet weak var facebookButton: UIButton!
+    
+    var XSRF:String?
+    
     override public func viewDidLoad() {
         super.viewDidLoad()
         
@@ -33,12 +38,11 @@ public class FCLockController: UIViewController {
         passwordField.layer.borderColor = UIColor.red.cgColor
         
         loginView.layer.cornerRadius = 4.0
-        
-        loginButton.disableButton()
         loginButton.layer.cornerRadius = 4.0
         
         // Apply theme colors
         applySkin(skin: FCLockConstants.ThemeDefault)
+        
     }
     
     override public func didReceiveMemoryWarning() {
@@ -67,7 +71,6 @@ public class FCLockController: UIViewController {
             
             // Expected next user action, passcode entry
             passwordField.placeholder = "Passcode"
-            passwordField.keyboardType = .numberPad
         }
         
     }
@@ -121,6 +124,30 @@ public class FCLockController: UIViewController {
             }
         }
     }
+    
+    
+    @IBAction func authenticateFacebook(_ sender: AnyObject) {
+        
+        guard let client = FCLockManager.sharedInstance.client.client_id,
+            let domain = FCLockManager.sharedInstance.client.domain,
+            let URLScheme = FCLockManager.sharedInstance.URLScheme else { return }
+        
+        let nonce = randomString(length: 6) // Negate replay attacks
+        let XSRF = FCLockManager.sharedInstance.generateXSRF()
+        let requestURL = URL(string: "https://fcauth.eu.auth0.com/authorize?response_type=token&client_id=\(client)&connection=facebook&state=\(XSRF)&redirect_uri=\(URLScheme)://facebook&nonce=\(nonce)")
+        
+        print(requestURL)
+        
+        webView.loadRequest(URLRequest(url: requestURL!))
+        view.bringSubview(toFront: webView)
+        webView.isHidden = false
+        
+    }
+    
+    func dismissWebView() {
+        webView.isHidden = true
+    }
+    
 }
 
 extension FCLockController: UITextFieldDelegate {

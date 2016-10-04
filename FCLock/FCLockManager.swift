@@ -7,8 +7,18 @@
 //
 
 import UIKit
+import SwiftyJSON
 
 public typealias FCLockHandler = () -> (Void)
+
+struct Auth0 {
+    var client_id:String?
+    var domain:String?
+}
+
+public enum SocialAuth {
+    case facebook, google
+}
 
 public class FCLockManager {
     
@@ -16,12 +26,14 @@ public class FCLockManager {
     
     let network:FCLockNetwork!
     let authController:FCLockController!
+    var client = Auth0()
+    var XSRF:String?
+    var URLScheme:String?
     
     public var onAuthentication:FCLockHandler = {}
     
     public var isAuthenticated:Bool {
-        if network.token.type.characters.count > 0 && network.token.id.characters.count > 0
-            && network.token.access.characters.count > 0 {
+        if let _ = network.token.access {
             return true
         }
         return false
@@ -29,6 +41,17 @@ public class FCLockManager {
     
     private init() {
         
+        // Check Auth0 credentials provided
+        guard let client_id = Bundle.main.object(forInfoDictionaryKey: "Auth0ClientId"),
+            let domain = Bundle.main.object(forInfoDictionaryKey: "Auth0Domain") else {
+                fatalError("Check Auth0 credentials (Auth0ClientId, Auth0Domain) set in Info.plist")
+        }
+        
+        client.client_id = client_id as! String
+        client.domain = domain as! String
+        
+        URLScheme = Bundle.main.object(forInfoDictionaryKey: "CFBundleIdentifier") as! String
+  
         // Setup networking
         network = FCLockNetwork()
         
@@ -59,6 +82,38 @@ public class FCLockManager {
         }
     }
     
+    
+    public func authenticate(social url: URL) {
+        
+        // Replace # so components can parse query string
+        let replaceURL = url.absoluteString.replacingOccurrences(of: "#", with: "?")
+        let components = URLComponents(string: replaceURL)
+        
+        // Extract important information
+        let queryItems  = components?.queryItems
+        let tokenAccess = queryItems?.filter { (item) in item.name == "access_token" }.first?.value!
+        let tokenType = queryItems?.filter { (item) in item.name == "token_type" }.first?.value!
+        let tokenXSRF = queryItems?.filter { (item) in item.name == "state" }.first?.value!
+        
+        guard let accessValue = tokenAccess, let typeValue = tokenType, let xsrf = tokenXSRF else {
+            authController.dismissWebView()
+            return
+        }
+        
+        if xsrf != XSRF {
+            print("XSRF Not Matching")
+            authController.dismissWebView()
+            return
+        }
+        
+        network.token.access = accessValue
+        network.token.type = typeValue
+        
+        self.authController.dismiss(animated: true, completion: nil)
+        self.onAuthentication()
+        
+    }
+    
     func requestPasscode(username: String, onError: @escaping FCLockHandler) {
         network.requestPasscode(username: username) { (success) in
             if success == true {
@@ -69,5 +124,10 @@ public class FCLockManager {
         }
     }
     
-
+    func generateXSRF() -> String {
+        XSRF = randomString(length: 12)
+        return XSRF!
+    }
+    
+    
 }

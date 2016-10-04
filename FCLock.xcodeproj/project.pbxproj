@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5B6698021DA2A38A00E5CABF /* icons in Resources */ = {isa = PBXBuildFile; fileRef = 5B6698011DA2A38A00E5CABF /* icons */; };
 		5B6BAB6E1D9EE76600073099 /* FCLockController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B6BAB6C1D9EE76600073099 /* FCLockController.swift */; };
 		5B6BAB6F1D9EE76600073099 /* FCLockController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5B6BAB6D1D9EE76600073099 /* FCLockController.xib */; };
 		5B6BAB711D9EF08000073099 /* FCLockConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B6BAB701D9EF08000073099 /* FCLockConstants.swift */; };
@@ -17,6 +18,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5B6698011DA2A38A00E5CABF /* icons */ = {isa = PBXFileReference; lastKnownFileType = folder; path = icons; sourceTree = "<group>"; };
 		5B6BAB6C1D9EE76600073099 /* FCLockController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FCLockController.swift; sourceTree = "<group>"; };
 		5B6BAB6D1D9EE76600073099 /* FCLockController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FCLockController.xib; sourceTree = "<group>"; };
 		5B6BAB701D9EF08000073099 /* FCLockConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FCLockConstants.swift; sourceTree = "<group>"; };
@@ -42,6 +44,7 @@
 		5B3D1B811D9FB21900E199BD /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				5B6698011DA2A38A00E5CABF /* icons */,
 				5B6BAB6D1D9EE76600073099 /* FCLockController.xib */,
 			);
 			name = Resources;
@@ -149,6 +152,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5B6BAB6F1D9EE76600073099 /* FCLockController.xib in Resources */,
+				5B6698021DA2A38A00E5CABF /* icons in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

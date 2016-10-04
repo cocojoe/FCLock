@@ -10,11 +10,13 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="FCLockController" customModule="FCLock" customModuleProvider="target">
             <connections>
+                <outlet property="facebookButton" destination="MYi-pN-UhU" id="lHw-Pk-f6r"/>
                 <outlet property="loginButton" destination="mcE-dY-3NW" id="ZtO-Ff-d0L"/>
                 <outlet property="loginView" destination="VdV-PX-099" id="ngQ-v7-XYa"/>
                 <outlet property="passwordField" destination="0in-Ci-oDR" id="p1a-M1-IZL"/>
                 <outlet property="usernameField" destination="3vV-ht-EnK" id="mjB-mp-frf"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+                <outlet property="webView" destination="kPn-cH-cPu" id="ZcW-BN-OMY"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -22,8 +24,22 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
+                <webView hidden="YES" contentMode="scaleToFill" scalesPageToFit="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kPn-cH-cPu">
+                    <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                </webView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VdV-PX-099">
                     <subviews>
+                        <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="qRN-75-yGF">
+                            <subviews>
+                                <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MYi-pN-UhU">
+                                    <inset key="titleEdgeInsets" minX="-1" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                    <state key="normal" image="fb_icon.png"/>
+                                    <connections>
+                                        <action selector="authenticateFacebook:" destination="-1" eventType="touchUpInside" id="a7U-FZ-LJg"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                        </stackView>
                         <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mcE-dY-3NW" customClass="FCButton" customModule="FCLock" customModuleProvider="target">
                             <color key="backgroundColor" red="0.84313725490000002" green="0.13725490200000001" blue="0.13725490200000001" alpha="1" colorSpace="calibratedRGB"/>
                             <fontDescription key="fontDescription" type="system" pointSize="20"/>
@@ -65,23 +81,31 @@
                     </subviews>
                     <color key="backgroundColor" red="0.93333333333333335" green="0.93333333333333335" blue="0.93333333333333335" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
+                        <constraint firstItem="qRN-75-yGF" firstAttribute="top" secondItem="VdV-PX-099" secondAttribute="top" constant="15" id="0RE-dk-3Nm"/>
                         <constraint firstItem="mcE-dY-3NW" firstAttribute="height" secondItem="v4Q-4y-Dyv" secondAttribute="height" multiplier="0.5" id="Bio-is-Lyq"/>
-                        <constraint firstAttribute="width" secondItem="VdV-PX-099" secondAttribute="height" multiplier="1.5:1" id="J3p-71-FBS"/>
+                        <constraint firstItem="qRN-75-yGF" firstAttribute="width" secondItem="VdV-PX-099" secondAttribute="width" multiplier="0.5" id="GIX-2W-vqy"/>
+                        <constraint firstAttribute="width" secondItem="VdV-PX-099" secondAttribute="height" multiplier="1:1" id="J3p-71-FBS"/>
                         <constraint firstItem="mcE-dY-3NW" firstAttribute="width" secondItem="v4Q-4y-Dyv" secondAttribute="width" id="J5o-Uv-sOQ"/>
                         <constraint firstAttribute="bottom" secondItem="mcE-dY-3NW" secondAttribute="bottom" constant="15" id="VxB-LS-g6E"/>
                         <constraint firstItem="v4Q-4y-Dyv" firstAttribute="width" secondItem="VdV-PX-099" secondAttribute="width" multiplier="0.9" id="WF9-Ol-yUK"/>
                         <constraint firstItem="v4Q-4y-Dyv" firstAttribute="centerX" secondItem="VdV-PX-099" secondAttribute="centerX" id="Yto-rF-Ean"/>
-                        <constraint firstItem="v4Q-4y-Dyv" firstAttribute="top" secondItem="VdV-PX-099" secondAttribute="top" constant="15" id="vz7-Be-kyA"/>
+                        <constraint firstItem="qRN-75-yGF" firstAttribute="centerX" secondItem="VdV-PX-099" secondAttribute="centerX" id="bt1-5Z-vSl"/>
+                        <constraint firstItem="v4Q-4y-Dyv" firstAttribute="top" secondItem="qRN-75-yGF" secondAttribute="bottom" constant="15" id="mkc-2V-oSt"/>
+                        <constraint firstItem="qRN-75-yGF" firstAttribute="height" secondItem="v4Q-4y-Dyv" secondAttribute="height" id="pUH-Ek-GVv"/>
                         <constraint firstItem="mcE-dY-3NW" firstAttribute="centerX" secondItem="v4Q-4y-Dyv" secondAttribute="centerX" id="y8m-6A-M1l"/>
                     </constraints>
                 </view>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="VdV-PX-099" firstAttribute="height" secondItem="i5M-Pr-FkT" secondAttribute="height" multiplier="0.5" id="1KP-fx-sFa"/>
-                <constraint firstItem="VdV-PX-099" firstAttribute="height" secondItem="i5M-Pr-FkT" secondAttribute="height" multiplier="0.3" id="QAJ-P2-DiX"/>
+                <constraint firstItem="VdV-PX-099" firstAttribute="height" secondItem="i5M-Pr-FkT" secondAttribute="height" multiplier="0.7" id="1KP-fx-sFa"/>
+                <constraint firstItem="VdV-PX-099" firstAttribute="height" secondItem="i5M-Pr-FkT" secondAttribute="height" multiplier="0.5" id="QAJ-P2-DiX"/>
+                <constraint firstItem="kPn-cH-cPu" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="ibq-dm-3nW"/>
+                <constraint firstItem="kPn-cH-cPu" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="lvE-7l-791"/>
                 <constraint firstItem="VdV-PX-099" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="o23-mf-rny"/>
+                <constraint firstItem="kPn-cH-cPu" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" id="s0v-rp-5T5"/>
                 <constraint firstItem="VdV-PX-099" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="ymM-oe-dUk"/>
+                <constraint firstItem="kPn-cH-cPu" firstAttribute="height" secondItem="i5M-Pr-FkT" secondAttribute="height" id="zof-oW-t2Q"/>
             </constraints>
             <variation key="default">
                 <mask key="constraints">
@@ -96,4 +120,7 @@
             </variation>
         </view>
     </objects>
+    <resources>
+        <image name="fb_icon.png" width="48" height="48"/>
+    </resources>
 </document>
