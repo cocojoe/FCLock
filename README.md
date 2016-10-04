@@ -85,7 +85,31 @@ let myAwesomeTheme = FCLockSkin(backgroundColor: UIColor(red:0.84, green:0.14, b
                                      buttonTextColor: UIColor(red:0.93, green:0.93, blue:0.93, alpha:1.0))
 ```
 
-Have fun...
+### Social Authentication
+
+To use the social authentication functionality you will need to register a URL Scheme in your *Info.plist* that will be used as a callback to your app. **Currently only the bundler identifier is supported**
+
+```
+<key>CFBundleURLTypes</key>
+<array>
+  <dict>
+    <key>CFBundleURLSchemes</key>
+    <array>
+      <string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
+    </array>
+  </dict>
+</array>
+```
+
+### Facebook support
+
+You will then need to add this to your *Callback* whitelist as `<YOUR BUNDLE ID>://facebook` the Auth0 settings for your app. 
+
+For Example:
+
+```
+io.frostycube.fclockexample://facebook
+```
 
 ## Built For
 
