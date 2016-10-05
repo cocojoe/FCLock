@@ -6,7 +6,7 @@ Pod::Spec.new do |s|
   s.summary = "FCLock is a lightweight Auth0 login widget."
   s.requires_arc = true
 
-  s.version = "0.3.0"
+  s.version = "0.3.1"
 
   s.license = { :type => "MIT", :file => "LICENSE" }
 

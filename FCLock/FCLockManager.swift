@@ -47,10 +47,10 @@ public class FCLockManager {
                 fatalError("Check Auth0 credentials (Auth0ClientId, Auth0Domain) set in Info.plist")
         }
         
-        client.client_id = client_id as! String
-        client.domain = domain as! String
+        client.client_id = client_id as? String
+        client.domain = domain as? String
         
-        URLScheme = Bundle.main.object(forInfoDictionaryKey: "CFBundleIdentifier") as! String
+        URLScheme = Bundle.main.object(forInfoDictionaryKey: "CFBundleIdentifier") as? String
   
         // Setup networking
         network = FCLockNetwork()

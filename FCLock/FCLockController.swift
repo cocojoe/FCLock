@@ -129,8 +129,7 @@ public class FCLockController: UIViewController {
     @IBAction func authenticateFacebook(_ sender: AnyObject) {
         
         guard let client = FCLockManager.sharedInstance.client.client_id,
-            let domain = FCLockManager.sharedInstance.client.domain,
-            let URLScheme = FCLockManager.sharedInstance.URLScheme else { return }
+              let URLScheme = FCLockManager.sharedInstance.URLScheme else { return }
         
         let nonce = randomString(length: 6) // Negate replay attacks
         let XSRF = FCLockManager.sharedInstance.generateXSRF()
