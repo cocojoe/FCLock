@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SafariServices
 
 enum authAction {
     case userNamePassword, passwordless, userNamePasscode
@@ -22,10 +23,9 @@ public class FCLockController: UIViewController {
     @IBOutlet weak var passwordField: UITextField!
     @IBOutlet weak var loginButton: FCButton!
     @IBOutlet weak var loginView: UIView!
-    
-    @IBOutlet weak var webView: UIWebView!
     @IBOutlet weak var facebookButton: UIButton!
     
+    var safariViewController: SFSafariViewController?
     var XSRF:String?
     
     override public func viewDidLoad() {
@@ -137,14 +137,19 @@ public class FCLockController: UIViewController {
         
         print(requestURL)
         
-        webView.loadRequest(URLRequest(url: requestURL!))
-        view.bringSubview(toFront: webView)
-        webView.isHidden = false
+        openSafari(URL: requestURL!)
         
     }
     
-    func dismissWebView() {
-        webView.isHidden = true
+    func openSafari(URL: URL) {
+        // Safari View Controller
+        safariViewController = SFSafariViewController(url: URL)
+        safariViewController?.delegate = self
+        self.present(safariViewController!, animated: true, completion: nil)
+    }
+    
+    func dismissSafari() {
+        safariViewController?.dismiss(animated: true, completion: nil)
     }
     
 }
@@ -193,5 +198,13 @@ extension FCLockController: UITextFieldDelegate {
         return true
     }
     
+}
+
+extension FCLockController : SFSafariViewControllerDelegate {
+    
+   public func safariViewControllerDidFinish(_ controller: SFSafariViewController) {
+        controller.delegate = nil
+        controller.dismiss(animated: true, completion: nil)
+    }
 }
 

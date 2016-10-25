@@ -96,19 +96,20 @@ public class FCLockManager {
         let tokenXSRF = queryItems?.filter { (item) in item.name == "state" }.first?.value!
         
         guard let accessValue = tokenAccess, let typeValue = tokenType, let xsrf = tokenXSRF else {
-            authController.dismissWebView()
+            authController.dismissSafari()
             return
         }
         
         if xsrf != XSRF {
             print("XSRF Not Matching")
-            authController.dismissWebView()
+            authController.dismissSafari()
             return
         }
         
         network.token.access = accessValue
         network.token.type = typeValue
         
+        authController.dismissSafari()
         self.authController.dismiss(animated: true, completion: nil)
         self.onAuthentication()
         
