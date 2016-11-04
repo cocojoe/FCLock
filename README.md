@@ -1,6 +1,6 @@
 # FCLock
 
-Lightweight Auth0 login widget.  Swift 3.0
+Lightweight Auth0 login widget (WIP). Swift 3.0
 
 ## Getting Started
 
